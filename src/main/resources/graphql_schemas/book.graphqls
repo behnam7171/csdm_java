@@ -1,0 +1,22 @@
+extend type Query {
+    allBooks: [Book!]!
+    book(id: ID!): Book!
+}
+
+extend type Mutation {
+    createBook(title: String!, genre: Genre!, Authors: [ID!]!): Book!
+    deleteBook(id: ID!) : Boolean
+    updateBook(id: ID!, title: String, genre: Genre, Authors: [ID!]) : Book!
+}
+
+type Book {
+    id: ID!
+    title: String!
+    genre: Genre!
+    authors: [Author!]!
+}
+
+enum Genre {
+    FICTION
+    NONFICTION
+}
