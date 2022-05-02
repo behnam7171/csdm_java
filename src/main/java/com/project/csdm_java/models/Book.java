@@ -16,10 +16,9 @@ public class Book {
     @Column(name = "genre", nullable = false)
     private Genre genre;
 
-    @ManyToMany(fetch = FetchType.EAGER,
+    @ManyToMany(fetch = FetchType.EAGER, // since a book does NOT have many authors, so it is ok to fetch the authors immediately, and we will not face performance issue
             cascade = {
                     CascadeType.PERSIST,
-                    CascadeType.MERGE
             })
     @JoinTable(name = "book_author",
             joinColumns = {@JoinColumn(name = "book_id")},
@@ -62,21 +61,13 @@ public class Book {
         return authors;
     }
 
-    public void setAuthors(List<Author> authors) {
-        this.authors = authors;
+    public void setAuthors(List<Author> newAuthors) {
+        authors = newAuthors;
     }
 
     public void addAuthor(Author author) {
         authors.add(author);
-        // author.getBooks().add(this);
     }
 
-//    public void deleteAuthors(long authorId) {
-//        Author author = this.authors.stream().filter(t -> t.getId() == authorId).findFirst().orElse(null);
-//        if (author != null) {
-//            this.authors.remove(author);
-//            author.getBooks().remove(this);
-//        }
-//    }
 
 }

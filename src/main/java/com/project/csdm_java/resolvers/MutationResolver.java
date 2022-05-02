@@ -5,6 +5,7 @@ import com.project.csdm_java.models.Book;
 import com.project.csdm_java.models.Genre;
 import com.project.csdm_java.repositories.AuthorRepository;
 import com.project.csdm_java.repositories.BookRepository;
+import graphql.GraphQLException;
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import org.hibernate.ObjectNotFoundException;
 
@@ -45,32 +46,36 @@ public class MutationResolver implements GraphQLMutationResolver {
     }
 
     public boolean deleteBook(Long id) {
-        bookRepository.deleteById(id);
-        return true;
+        if (this.bookExists(id)) {
+            bookRepository.deleteById(id);
+            return true;
+        } else {
+            throw new GraphQLException("Book was not found!");
+        }
+
     }
 
-    public Book updateBook(Long id, String title, Genre genre, List<Author> authors) throws ObjectNotFoundException {
+    public Book updateBook(Long id, String title, Genre genre, List<Long> authorsIds) throws ObjectNotFoundException {
         Optional<Book> currentBook = bookRepository.findById(id);
-        try {
-            if (currentBook.isPresent()) {
-                Book book = currentBook.get();
-                if (title != null) {
-                    book.setTitle(title);
-                }
-                if (genre != null) {
-                    book.setGenre(genre);
-                }
-                if (authors != null) {
-                    book.setAuthors(authors);
-                }
-                bookRepository.save(book);
-                return book;
-            } else {
-                return null;
+        if (this.bookExists(id)) {
+            Book book = currentBook.get();
+            if (title != null) {
+                book.setTitle(title);
             }
-        } catch (ObjectNotFoundException e) {
-            return null;
+            if (genre != null) {
+                book.setGenre(genre);
+            }
+            if (authorsIds != null && authorsIds.size() != 0) {
+                List<Author> authors = authorRepository.findAllById(authorsIds);
+                book.setAuthors(authors);
+            }
+
+            bookRepository.save(book);
+            return book;
+        } else {
+            throw new GraphQLException("Book was not found!");
         }
+
     }
 
     public Author createAuthor(String firstName, String lastName, LocalDate dateOfBirth) {
@@ -80,5 +85,10 @@ public class MutationResolver implements GraphQLMutationResolver {
         author.setDateOfBirth(dateOfBirth);
         authorRepository.save(author);
         return author;
+    }
+
+    private boolean bookExists(Long id) {
+        Optional<Book> currentBook = bookRepository.findById(id);
+        return currentBook.isPresent();
     }
 }

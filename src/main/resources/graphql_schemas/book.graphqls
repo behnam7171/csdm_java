@@ -4,9 +4,9 @@ extend type Query {
 }
 
 extend type Mutation {
-    createBook(title: String!, genre: Genre!, Authors: [ID!]!): Book!
+    createBook(title: String!, genre: Genre!, authorIds: [ID!]!): Book!
     deleteBook(id: ID!) : Boolean
-    updateBook(id: ID!, title: String, genre: Genre, Authors: [ID!]) : Book!
+    updateBook(id: ID!, title: String, genre: Genre, authorIds: [ID!]) : Book!
 }
 
 type Book {

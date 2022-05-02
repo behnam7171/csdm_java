@@ -21,10 +21,9 @@ public class Author {
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
-    @ManyToMany(fetch = FetchType.EAGER,
+    @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
+                    CascadeType.PERSIST
             },
             mappedBy = "authors")
     private List<Book> books = new ArrayList<>();
@@ -72,11 +71,6 @@ public class Author {
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
-    }
-
-    @Override
-    public String toString() {
-        return "User [id=" + id + ", first_name=" + firstName + ", last_name=" + lastName + ", date_of_birth=" + dateOfBirth + "]";
     }
 
 

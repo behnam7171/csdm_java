@@ -4,6 +4,7 @@ import com.project.csdm_java.models.Author;
 import com.project.csdm_java.models.Book;
 import com.project.csdm_java.repositories.AuthorRepository;
 import com.project.csdm_java.repositories.BookRepository;
+import graphql.GraphQLException;
 import graphql.kickstart.tools.GraphQLQueryResolver;
 
 
@@ -22,11 +23,11 @@ public class QueryResolver implements GraphQLQueryResolver {
     }
 
     public Author author(Long id) {
-        return authorRepository.findById(id).orElseThrow(null);
+        return authorRepository.findById(id).orElseThrow(()-> new GraphQLException("Author was not found!"));
     }
 
     public Book book(Long id) {
-        return bookRepository.findById(id).orElseThrow(null);
+        return bookRepository.findById(id).orElseThrow(()-> new GraphQLException("Book was not found!"));
     }
 
 }
