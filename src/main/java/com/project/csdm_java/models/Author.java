@@ -2,7 +2,9 @@ package com.project.csdm_java.models;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -10,7 +12,7 @@ import java.util.Set;
 public class Author {
     @Id
     @Column(name = "author_id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -19,16 +21,16 @@ public class Author {
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
-    @ManyToMany(fetch = FetchType.LAZY,
+    @ManyToMany(fetch = FetchType.EAGER,
             cascade = {
                     CascadeType.PERSIST,
                     CascadeType.MERGE
             },
             mappedBy = "authors")
-    private Set<Book> books = new HashSet<Book>();
+    private List<Book> books = new ArrayList<>();
 
     public void addBooks(Book book) {
-        this.books.add(book);
+        books.add(book);
     }
 
     public Author() {
@@ -70,14 +72,6 @@ public class Author {
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
-    }
-
-    public Set<Book> getBooks() {
-        return books;
-    }
-
-    public void setBooks(Set<Book> books) {
-        this.books = books;
     }
 
     @Override

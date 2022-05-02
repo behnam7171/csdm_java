@@ -1,18 +1,18 @@
 scalar Date
 
+type Author {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    dateOfBirth: Date
+}
+
 type Query {
     author(id: ID): Author!
 }
 
 type Mutation {
     createAuthor(firstName: String!, lastName: String!, dateOfBirth: Date): Author!
-}
-
-type Author {
-    id: ID!
-    firstName: String!
-    lastName: String!
-    dateOfBirth: Date
 }
 
 

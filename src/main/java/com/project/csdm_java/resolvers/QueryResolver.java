@@ -5,15 +5,13 @@ import com.project.csdm_java.models.Book;
 import com.project.csdm_java.repositories.AuthorRepository;
 import com.project.csdm_java.repositories.BookRepository;
 import graphql.kickstart.tools.GraphQLQueryResolver;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-@Component
+
 public class QueryResolver implements GraphQLQueryResolver {
     private final AuthorRepository authorRepository;
     private final BookRepository bookRepository;
 
-    @Autowired
+
     public QueryResolver(BookRepository bookRepository, AuthorRepository authorRepository) {
         this.bookRepository = bookRepository;
         this.authorRepository = authorRepository;

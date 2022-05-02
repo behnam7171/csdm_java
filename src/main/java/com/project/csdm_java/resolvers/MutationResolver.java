@@ -7,29 +7,39 @@ import com.project.csdm_java.repositories.AuthorRepository;
 import com.project.csdm_java.repositories.BookRepository;
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import org.hibernate.ObjectNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
-@Component
+
 public class MutationResolver implements GraphQLMutationResolver {
     private final BookRepository bookRepository;
     private final AuthorRepository authorRepository;
 
-    @Autowired
+
     public MutationResolver(BookRepository bookRepository, AuthorRepository authorRepository) {
         this.bookRepository = bookRepository;
         this.authorRepository = authorRepository;
     }
 
-    public Book createBook(String title, Genre genre, Set<Author> authors) {
+    public Book createBook(String title, Genre genre, List<Long> authorsIds) {
         Book book = new Book();
         book.setTitle(title);
         book.setGenre(genre);
-        book.setAuthors(authors);
+
+        // find the authors
+        List<Author> authors = authorRepository.findAllById(authorsIds);
+
+        // book.setAuthors(Set.copyOf(authors));
+        bookRepository.save(book);
+
+        for (Author author : authors) {
+            // did not check for null because findAllById never returns null if id was not found
+            // it just returns the authors that exists in the list of ids
+            book.addAuthor(author);
+        }
+
         bookRepository.save(book);
         return book;
     }
@@ -39,7 +49,7 @@ public class MutationResolver implements GraphQLMutationResolver {
         return true;
     }
 
-    public Book updateBook(Long id, String title, Genre genre, Set<Author> authors) throws ObjectNotFoundException {
+    public Book updateBook(Long id, String title, Genre genre, List<Author> authors) throws ObjectNotFoundException {
         Optional<Book> currentBook = bookRepository.findById(id);
         try {
             if (currentBook.isPresent()) {

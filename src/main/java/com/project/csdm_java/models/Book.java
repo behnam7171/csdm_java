@@ -1,22 +1,22 @@
 package com.project.csdm_java.models;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "books")
 public class Book {
     @Id
-    @Column(name="book_id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "book_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "title", nullable = false)
     private String title;
     @Column(name = "genre", nullable = false)
     private Genre genre;
 
-    @ManyToMany(fetch = FetchType.LAZY,
+    @ManyToMany(fetch = FetchType.EAGER,
             cascade = {
                     CascadeType.PERSIST,
                     CascadeType.MERGE
@@ -24,7 +24,7 @@ public class Book {
     @JoinTable(name = "book_author",
             joinColumns = {@JoinColumn(name = "book_id")},
             inverseJoinColumns = {@JoinColumn(name = "author_id")})
-    private Set<Author> authors = new HashSet<Author>();
+    private List<Author> authors = new ArrayList<Author>();
 
     public Book() {
     }
@@ -58,25 +58,25 @@ public class Book {
         this.genre = genre;
     }
 
-    public Set<Author> getAuthors() {
+    public List<Author> getAuthors() {
         return authors;
     }
 
-    public void setAuthors(Set<Author> authors) {
+    public void setAuthors(List<Author> authors) {
         this.authors = authors;
     }
 
-    public void createAuthor(Author author) {
-        this.authors.add(author);
-        author.getBooks().add(this);
+    public void addAuthor(Author author) {
+        authors.add(author);
+        // author.getBooks().add(this);
     }
 
-    public void deleteAuthors(long authorId) {
-        Author author = this.authors.stream().filter(t -> t.getId() == authorId).findFirst().orElse(null);
-        if (author != null) {
-            this.authors.remove(author);
-            author.getBooks().remove(this);
-        }
-    }
+//    public void deleteAuthors(long authorId) {
+//        Author author = this.authors.stream().filter(t -> t.getId() == authorId).findFirst().orElse(null);
+//        if (author != null) {
+//            this.authors.remove(author);
+//            author.getBooks().remove(this);
+//        }
+//    }
 
 }
