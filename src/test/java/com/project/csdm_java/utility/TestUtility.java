@@ -17,8 +17,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public final class TestUtility {
     // final -> prevent extend and inheritance
 
-    static String requestPathTemplate = "book/{0}/{1}.graphql";
-    static String resultPathTemplate = "book/{0}/{1}.json";
     @Autowired
     GraphQLTestTemplate testTemplate;
 
