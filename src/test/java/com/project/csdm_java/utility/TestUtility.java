@@ -26,18 +26,4 @@ public final class TestUtility {
         InputStream fileStream = new ClassPathResource(path).getInputStream();
         return IOUtils.toString(fileStream, StandardCharsets.UTF_8);
     }
-
-    public void jsonComparison(String testFileName) throws IOException {
-        String requestFilePath = MessageFormat.format(requestPathTemplate, new String[]{"requests", testFileName});
-        String resultFilePath = MessageFormat.format(resultPathTemplate, new String[]{"results", testFileName});
-
-        String expectedResponse = readFile(resultFilePath);
-
-        GraphQLResponse result = testTemplate.postForResource(requestFilePath);
-
-        // GraphQL returns 200 even in exceptions
-        assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
-
-        assertThat("Book was not found!").isEqualTo(result.getRawResponse().getBody());
-    }
 }
