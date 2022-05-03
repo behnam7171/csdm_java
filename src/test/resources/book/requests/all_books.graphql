@@ -1,0 +1,12 @@
+{
+    allBooks{
+        id
+        title
+        genre
+        authors {
+            firstName
+            lastName
+            dateOfBirth
+        }
+    }
+}

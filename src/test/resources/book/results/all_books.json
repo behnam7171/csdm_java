@@ -1,0 +1,35 @@
+{
+  "data": {
+    "allBooks": [
+      {
+        "id": "1",
+        "title": "Behnam: Story of my life",
+        "genre": "FICTION",
+        "authors": [
+          {
+            "firstName": "Simone",
+            "lastName": "Lunari",
+            "dateOfBirth": "2020-01-08"
+          },
+          {
+            "firstName": "Behnam",
+            "lastName": "Bozorgi",
+            "dateOfBirth": "1992-04-29"
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "title": "Behnam: I have 1 author",
+        "genre": "NONFICTION",
+        "authors": [
+          {
+            "firstName": "Behnam",
+            "lastName": "Bozorgi",
+            "dateOfBirth": "1992-04-29"
+          }
+        ]
+      }
+    ]
+  }
+}

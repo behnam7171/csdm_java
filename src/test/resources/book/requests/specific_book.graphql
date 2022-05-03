@@ -1,0 +1,13 @@
+{
+    book (id: 2){
+        id
+        title
+        genre
+        authors {
+            id
+            firstName
+            lastName
+            dateOfBirth
+        }
+    }
+}

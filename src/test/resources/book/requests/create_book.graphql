@@ -1,0 +1,13 @@
+mutation {
+    createBook(title: "Behnam: called from postman", genre: NONFICTION, authorIds: ["1","2"]) {
+        id
+        title
+        genre
+        authors {
+            id
+            firstName
+            lastName
+            dateOfBirth
+        }
+    }
+}

@@ -1,6 +1,5 @@
 mutation {
-    createAuthor(firstName: "Behnam", lastName: "Bozorgi", dateOfBirth: "1992-04-29") {
-        id
+    createAuthor(firstName: "name", lastName: "family", dateOfBirth: "1980-11-05") {
         firstName
         lastName
         dateOfBirth

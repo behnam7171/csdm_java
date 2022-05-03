@@ -1,0 +1,23 @@
+{
+  "data": {
+    "updateBook": {
+      "id": "1",
+      "title": "Behnam: title and Author [1,2] changed to [1,3]",
+      "genre": "FICTION",
+      "authors": [
+        {
+          "id": "1",
+          "firstName": "Simone",
+          "lastName": "Lunari",
+          "dateOfBirth": "2020-01-08"
+        },
+        {
+          "id": "3",
+          "firstName": "Name",
+          "lastName": "Family",
+          "dateOfBirth": "1996-09-30"
+        }
+      ]
+    }
+  }
+}

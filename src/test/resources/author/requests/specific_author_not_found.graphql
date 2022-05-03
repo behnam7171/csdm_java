@@ -1,5 +1,5 @@
 {
-    author (id: 2){
+    author (id: 1000){
         id
         firstName
         lastName
