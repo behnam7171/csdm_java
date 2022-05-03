@@ -1,0 +1,8 @@
+mutation {
+    createAuthor(firstName: "Behnam", lastName: "Bozorgi", dateOfBirth: "1992-04-29") {
+        id
+        firstName
+        lastName
+        dateOfBirth
+    }
+}

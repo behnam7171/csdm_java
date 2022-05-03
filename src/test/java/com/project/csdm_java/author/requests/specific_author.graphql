@@ -1,0 +1,8 @@
+{
+    author (id: 2){
+        id
+        firstName
+        lastName
+        dateOfBirth
+    }
+}

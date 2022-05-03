@@ -34,17 +34,5 @@ public class CsdmJavaApplication {
 		return new MutationResolver(bookRepository, authorRepository);
 	}
 
-	@Bean
-	public CommandLineRunner demo(BookRepository bookRepository, AuthorRepository authorRepository) {
-		return (args) -> {
-			Author simone = new Author("Simone", "Lunari", LocalDate.of(2020, Month.JANUARY, 8));
-			Author behnam = new Author("Behnam", "Bozorgi", LocalDate.of(1992, Month.APRIL, 29));
-			List<Author> authors = Arrays.asList(simone, behnam);
-			authorRepository.saveAll(authors);
-
-			Book book = new Book("Behnam: Story of my life", Genre.FICTION);
-			bookRepository.save(book);
-		};
-	}
 
 }
