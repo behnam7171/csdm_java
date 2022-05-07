@@ -48,20 +48,22 @@
 			<version>${graphql.spring.starter.version}</version>
 			<scope>runtime</scope>
 		</dependency>
-		<dependency> <!-- See http://localhost:8080/voyager -->
-			<groupId>com.graphql-java-kickstart</groupId>
-			<artifactId>voyager-spring-boot-starter</artifactId>
-			<version>${graphql.spring.starter.version}</version>
-			<scope>runtime</scope>
+		<dependency>
+			<groupId>com.graphql-java</groupId>
+			<artifactId>graphql-java-extended-validation</artifactId>
+			<version>16.0.0</version>
 		</dependency>
-
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<version>${h2.version}</version>
 			<scope>runtime</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.4.0.Final</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>

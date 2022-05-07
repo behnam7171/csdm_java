@@ -16,7 +16,7 @@ public class Book {
     @Column(name = "genre", nullable = false)
     private Genre genre;
 
-    @ManyToMany(fetch = FetchType.EAGER, // since a book does NOT have many authors, so it is ok to fetch the authors immediately, and we will not face performance issue
+    @ManyToMany(fetch = FetchType.EAGER,
             cascade = {
                     CascadeType.PERSIST,
             })

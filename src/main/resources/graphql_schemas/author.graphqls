@@ -1,18 +1,19 @@
 scalar Date
+directive @NotBlank(message : String = "graphql.validation.NotBlank.message") on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
 
 type Author {
     id: ID!
     firstName: String!
     lastName: String!
-    dateOfBirth: Date
+    dateOfBirth: Date!
 }
 
 type Query {
-    author(id: ID): Author!
+    author(id: ID @NotBlank): Author!
 }
 
 type Mutation {
-    createAuthor(firstName: String!, lastName: String!, dateOfBirth: Date): Author!
+    createAuthor(firstName: String! @NotBlank, lastName: String! @NotBlank, dateOfBirth: Date!): Author!
 }
 
 

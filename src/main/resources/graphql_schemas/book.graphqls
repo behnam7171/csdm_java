@@ -1,12 +1,12 @@
 extend type Query {
     allBooks: [Book!]!
-    book(id: ID!): Book!
+    book(id: ID! @NotBlank): Book!
 }
 
 extend type Mutation {
-    createBook(title: String!, genre: Genre!, authorIds: [ID!]!): Book!
-    deleteBook(id: ID!) : Boolean
-    updateBook(id: ID!, title: String, genre: Genre, authorIds: [ID!]) : Book!
+    createBook(title: String!, genre: Genre!, authorIds: [ID!]! @NotBlank): Book!
+    deleteBook(id: ID! @NotBlank) : Boolean
+    updateBook(id: ID! @NotBlank, title: String @NotBlank, genre: Genre, authorIds: [ID!] @NotBlank) : Book!
 }
 
 type Book {
