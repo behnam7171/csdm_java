@@ -52,8 +52,7 @@ public class BookTest {
         Book book = new Book("Behnam: Story of my life", Genre.FICTION);
         bookRepository.save(book);
 
-        book.addAuthor(simone);
-        book.addAuthor(behnam);
+        book.addAuthors(Arrays.asList(simone, behnam));
         bookRepository.save(book);
 
         Book book2 = new Book("Behnam: I have 1 author", Genre.NONFICTION);

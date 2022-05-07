@@ -69,5 +69,9 @@ public class Book {
         authors.add(author);
     }
 
+    public void addAuthors(List<Author> targetAuthors) {
+        authors.addAll(targetAuthors);
+    }
+
 
 }

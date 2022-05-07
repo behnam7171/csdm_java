@@ -32,13 +32,12 @@ public class MutationResolver implements GraphQLMutationResolver {
         // find the authors
         List<Author> authors = authorRepository.findAllById(authorsIds);
 
+        // did not check for null because findAllById (on few lines above) never returns null if id was not found
+        // it just returns the authors that exists in the list of ids
+
         bookRepository.save(book);
 
-        for (Author author : authors) {
-            // did not check for null because findAllById (on few lines above) never returns null if id was not found
-            // it just returns the authors that exists in the list of ids
-            book.addAuthor(author);
-        }
+        book.addAuthors(authors);
 
         bookRepository.save(book);
         return book;
